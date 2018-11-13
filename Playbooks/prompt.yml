@@ -1,0 +1,15 @@
+--- # Promopt For User Package Example
+- hosts: apacheweb
+  remote_user: test
+  become: yes
+  become_method: sudo
+  connection: ssh
+  gather_facts: no
+  vars_prompt:
+    - name: pkgtoinstall
+      prompt: Install Which Package?
+      default: telnet
+      private: no
+  tasks:
+    - name: Install the indicated package
+      yum: pkg={{ pkgtoinstall }} state=latest

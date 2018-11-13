@@ -1,0 +1,11 @@
+--- # Full Include Tasks Example
+- hosts: apacheweb
+  become: yes
+  become_method: sudo
+  remote_user: test
+  connection: ssh
+  gather_facts: no
+  tasks:
+    - include: plays/packages.yml
+    - name: Verify the telnet package is installed
+      raw: yum list installed | grep telnet > /home/test/pkgs.logs

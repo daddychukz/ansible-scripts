@@ -1,0 +1,14 @@
+--- # Master Playbook for Webservers
+- hosts: apacheweb
+  become: yes
+  become_method: sudo
+  remote_user: test
+  connection: ssh
+  pre_tasks:
+  - name: When did the role start
+    raw: date > /home/test/rolestart.log
+  roles:
+    - webservers
+  post_tasks:
+  - name: When did the role end
+    raw: date > /home/test/roleend.log
